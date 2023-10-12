@@ -104,21 +104,23 @@ def get_cassa_balance(request):
 
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def total_expense(request):
     cassa = Cassa.objects.first()
     money = request.GET.get('money')
     cassa.balance -= money
     cassa.expense+= money
-    ser = {'total_income': cassa.expense}
+    cassa.save()
+    ser = {'total_expense': cassa.expense}
     return Response(ser)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def total_income(request):
     cassa = Cassa.objects.first()
     money = request.GET.get('money')
     cassa.balance += money
     cassa.expense-= money
+    cassa.save()
     ser = {'total_income': cassa.income}
     return Response(ser)
