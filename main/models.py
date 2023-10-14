@@ -50,7 +50,6 @@ class Room(models.Model):
         return self.number
 
 
-
 class Bemor(models.Model):
     name = models.CharField(max_length=30)
     age = models.IntegerField()
@@ -67,7 +66,8 @@ class Bemor(models.Model):
     check_out_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.bemor.name
+
 
 class Bemor_tolov(models.Model):
     bemor = models.ForeignKey(to=Bemor, on_delete=models.PROTECT)
@@ -76,8 +76,6 @@ class Bemor_tolov(models.Model):
 
     def __str__(self):
           return self.bemor.name
-
-
 
 
 class Cassa(models.Model):
